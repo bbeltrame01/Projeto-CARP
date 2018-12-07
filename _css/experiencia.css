@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+table td#descricao {
+    text-align: left;
+}
+
+table#experiencia {
+    justify-content: space-between;
+    margin: auto;
+}

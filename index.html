@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Projeto CARP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+
+  <link rel="stylesheet" href="_css/menu.css">
+  <link rel="stylesheet" href="_css/contato.css">
+  <link rel="stylesheet" href="_css/style.css" media="screen">
+  <link rel="stylesheet" href="_css/experiencia.css">
+  <link rel="stylesheet" href="_css/formacao.css">
+  <link rel="stylesheet" href="_css/habilidades.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="_javascript/jquery.mask.js"></script>
+
+  <script type="text/javascript">
+    $(window).on('scroll', function () {
+      if ($(window).scrollTop()) {
+        $('nav').addClass('black');
+      }
+      else
+        $('nav').removeClass('black');
+    });
+  </script>
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li>
+                        <a href="#home">Início</a>
+                    </li>
+                    <li>
+                        <a href="#wt">O que é?</a>
+                    </li>
+                    <li>
+                        <a href="#conf">Configuração</a>
+                    </li>
+                    <li>
+                        <a href="#test">Testes</a>
+                    </li>
+                    <li>
+                        <a href="img">Imagens</a>
+                    </li>
+                    <li>
+                        <a href="#c">Conclusão</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section id="home" class="hero overlay" data-stellar-background-ratio="0.3">
+            <div class="content">
+              <h1>Protocolo CARP</h1>
+              <h3>Common Address Redundancy Protocol</h3>
+              <a class="btn" href="#wt">Leia Mais</a>
+            </div>
+    </section>
+    <section class="wrapper">
+            <div id="wt" class="content">
+              <h2>O que é?</h2>
+              <p>CARP (Common Address Redundancy Protocol) é um protocolo que permite que múltiplos hosts (até 255) em uma rede local compartilhem de um mesmo endereço IP. Algumas de suas funcionalidades são similares ao VRRP, mas o CARP difere em alguns aspectos significantes: CARP foi desenhado para prover segurança e ser um protocolo independente (assim ele pode suportar IPv4 e IPv6), pode-se trabalhar com load balancing e com isto alta disponibilidade.</p>
+            </div>
+    </section>
+    <section class="middle overlay" data-stellar-background-ratio="0.3">
+            <div id="conf" class="content">
+              <table>
+                <h2>Como configura?</h2>
+                <tr>
+                  <td id="data">Passo 1</td>
+                  <td rowspan="2">|</td>                  
+                  <td id="txt" rowspan="2">Para configuração do protocolo, utilizamos o Sistema Operacional OpenBSD.<br>Para isso realizamos o download da ISO no site oficial e instalamos no Oracle VM VirtualBox.<br>Utilizamos as opções padrões do SO.</td>
+                  <a href="https://www.openbsd.org/faq/faq4.html#Download" target="_blank">Site Oficial OpenBSD</a>
+                  <tr>
+                    <!--<td id="data">Sistema Operacional</td>-->
+                    
+                  </tr>
+        
+                  <tr>
+                    <td id="data">Passo 2</td>
+                    <td rowspan="2">|
+                    </td>
+                    <td id="txt" rowspan="2">Para configuração da rede, realizamos os seguintes comandos:<br><br><b>No Servidor (master):</b><br>
+                    <i><br>/etc/hostname.em0:<br></i>
+                        inet 192.168.90.2 255.255.255.0 192.168.90.255<br>
+                        <br>
+                      /etc/mygate<br>
+                        192.168.90.254<br>
+                        <br>
+                    # sh /etc/netstart<br>
+                    # sysctl -w net.inet.carp.allow=1<br>
+                      # sysctl -w net.inet.carp.preempt=1<br>
+                      # sysctl -w net.inet.carp.log=7<br>
+                    <br>/etc/sysctl.conf<br>
+                          net.inet.carp.allow=1<br>
+                          net.inet.carp.preempt=1<br>
+                          net.inet.carp.log=7<br>
+                          <br>
+                      # ifconfig carp1 create<br>
+                      # ifconfig carp1 vhid 1 pass 1234567890<br>
+                      # ifconfig carp1 carpdev em0<br>
+                      # ifconfig carp1 192.168.90.1<br>
+                    <br>/etc/hostname.carp1<br>
+                          inet 192.168.90.1 255.255.255.0 192.168.90.255 vhid 1 pass 1234567890 advskew 1<br>
+                          carpdev em0
+                  </tr>
+                  <tr>
+                    <!--<td id="data">Protocolo CARP</td>-->
+                  </tr>
+
+                  <tr>
+                      <td id="data">Passo 4</td>
+                      <td rowspan="2">|
+                      </td>
+                      <td id="txt" rowspan="2">Para finalizar, realizamos os seguintes comandos:<br><b>No Servidor (backup):</b><br>
+                        arquivo /etc/hostname.em0:<br>
+                        inet 192.168.90.3 255.255.255.0 192.168.90.255<br>
+                        <br>
+                      /etc/mygate<br>
+                        192.168.90.254<br>
+                        <br>
+                    # sh /etc/netstart<br>
+                    # sysctl -w net.inet.carp.allow=1<br>
+                    # sysctl -w net.inet.carp.preempt=1<br>
+                    # sysctl -w net.inet.carp.log=7<br>
+                      /etc/sysctl.conf<br>
+                        net.inet.carp.allow=1<br>
+                        net.inet.carp.preempt=1<br>
+                        net.inet.carp.log=7<br>
+                        <br>
+                    # ifconfig carp1 create<br>
+                    # ifconfig carp1 vhid 1 pass 1234567890<br>
+                    # ifconfig carp1 carpdev em0<br>
+                    # ifconfig carp1 192.168.90.1<br>
+                      /etc/hostname.carp1<br>
+                        inet 192.168.90.1 255.255.255.0 192.168.90.255 vhid 1 pass 1234567890 advskew 2<br>
+                      </td>
+                    </tr>
+                    <tr>
+                      <!--<td id="data">Rede</td>-->
+                    </tr>
+              </table>
+            </div>
+    </section>
+    
+    <section class="wrapper">
+            <div id="test" class="content">
+              <h2>Testes</h2>
+                  <p id="descricao">Após tudo configurado, carregamos o site no ip "192.168.90.1" e disparamos o ping de um computador externo nesse mesmo ip, cancelamos a conexão do servidor master com o site, e o servidor backup assumiu, mantendo o site ativo e tornando-se servidor principal.</td>
+                  </p>
+            </div>
+    </section>
+    <section class="lower overlay" data-stellar-background-ratio="0.3">
+      <div id="img" class="content">
+        <h2>Imagens</h2>
+        <ul class="h_icons">
+          <li id="carp">
+            <img src="_media/img_2.png" />
+          </li>
+          <li id="teste">
+            <img src="_media/testes.jpeg" />
+          </li>
+          <li id="openbsd">
+            <img src="_media/openbsd.jpg" />
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="wrapper">
+            <div id="c" class="content">
+              <h2>Conclusão</h2>
+              <p>Basicamente a utilidade do protocolo CARP é aumentar a disponibilidade do serviço, ou seja, garantir que em um possível esgotamento de recurso de hardware ou quebra no serviço master o servidor backup irá restabelecer, garantindo a alta disponibilidade de forma transparente.</p>
+            </div>
+    </section>
+    <footer id="rodape">
+      <section class="bottom">
+        <div class="rodape">
+          <p>Copyright &copy; 2018 - by
+            Bruno Beltrame,
+            Cristian Abramchuk
+          </p>
+        </div>
+      </section>
+    </footer>
+    <script src="_javascript/jquery-2.0.2.js"></script>
+    <script src="_javascript/jquery.stellar.min.js"></script>
+    <script>
+      $.stellar();
+    </script>
+  
+    <script type="text/javascript" src="_javascript/menu.js"></script>
+</body>
+
+</html>

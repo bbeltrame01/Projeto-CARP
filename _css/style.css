@@ -1,0 +1,228 @@
+*{
+	-webkit-box-sizing:border-box;
+	   -moz-box-sizing:border-box;
+	        box-sizing:border-box;
+}
+
+@font-face {
+    font-family: Alisandra Demo;
+    src: url('_fontes/Alisandra Demo.ttf') format('truetype');
+    font-family: Avenir Light;
+    src: url('_fontes/Avenir Light.otf');
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	font-family: Quicksand;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Basic Styles for the page */
+html{
+	background:#CCC;
+	text-align: center;
+	height:100%;
+	font-size: 20px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+}
+body{
+	height:100%;
+	color:white;
+	text-shadow:1px 1px 0 #000;
+}
+
+a:link, a:visited{
+	color:#E0CB77;
+	text-decoration: none;
+}
+a:active{
+	color:#3F5263;
+}
+a:hover{
+	text-decoration: underline;
+}
+a.btn {
+	border: 3px solid #E0CB77;
+	font-family: inherit;
+	font-size: inherit;
+	text-decoration: none;
+	color: white ;
+	background: transparent;
+	cursor: pointer;
+	padding: 1.4rem 4rem;
+	display:inline-block;
+	text-align:center;
+	margin:0;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	outline: none;
+	position: relative;
+	border-radius:2px;
+	-webkit-transition:all 0.1s ease-in-out;
+	   -moz-transition:all 0.1s ease-in-out;
+	        transition:all 0.1s ease-in-out;
+}
+a.btn:hover{
+	background:#E0CB77;
+	color:white;
+}
+
+
+/* Text Styles for the page */
+h1 {
+	font-size: 4rem;
+	text-transform: uppercase;
+	margin-bottom:20px;
+}
+h2 {
+	font-size: 2.5rem;
+	text-transform: uppercase;
+	line-height: 4rem;
+	margin-bottom:20px;
+}
+h3 {
+	font-size: 1.6rem;
+	text-transform: uppercase;
+	line-height: 2.5rem;
+	margin-bottom:20px;
+}
+p {
+	font-size: 1rem;
+	line-height: 2rem;
+	text-shadow:none;
+}
+blockquote {
+	font-size: 1.2rem;
+}
+pre {
+	font-size: 0.9rem;
+}
+
+
+
+.content{
+	display:block;
+	width:100%;
+	top: 30%;
+	max-width: 960px;
+	margin:0 auto;
+	overflow:hidden;
+}
+
+.hero .content {
+	position: relative;
+}
+
+.content img{
+	display:inline;
+	padding:10px;
+}
+
+/* Section Styles for the page */
+section{
+	background:white;
+	padding: 100px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+.wrapper{
+	color:#000;
+	text-shadow:none;
+	height: auto;
+}
+
+.hero{
+	background:url('../_media/img3.jpg');
+	background-size: cover;
+	height: 100%;
+    max-height:100%;
+}
+.middle{
+	background:url('../_media/redes.jpg');
+}
+.lower{
+	background:url('../_media/redes_cooperacao.jpg');
+}
+.bottom{
+	background:#26292C;
+	height: 100px;
+	margin-top: 0px;
+	padding: 0;
+}
+
+.rodape {
+	display: block;
+	position: relative;
+	bottom: 0;
+	color: #fff;
+}
+
+footer#rodape {
+	clear: both;
+}
+
+footer#rodape p {    
+	font-size: 15px;
+	text-align: center;
+}
+
+.overlay{
+	position: relative;
+  	z-index: 1;
+}
+.overlay:after{
+	background:rgba(0, 0, 0, 0.6);
+	content: "";
+	width: 100%;
+	height: auto;
+	position: absolute;
+	z-index: -1; 
+ 	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
